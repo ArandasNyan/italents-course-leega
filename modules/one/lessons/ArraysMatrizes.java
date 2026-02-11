@@ -17,6 +17,7 @@ public class ArraysMatrizes {
 
     System.out.print("Digite um número: ");
     numeros2[0] = Integer.parseInt(scanner.nextLine());
+    scanner.close();
     System.out.println("O seu número é: " + numeros2[0]);
   }
 }

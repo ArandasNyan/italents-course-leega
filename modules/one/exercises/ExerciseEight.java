@@ -15,7 +15,6 @@ public class ExerciseEight {
     // Controla o loop enquanto o usuário quiser continuar digitando números
     boolean desejaAdicionarMaisNumero = true;
 
-    // Loop principal da aplicação
     while (desejaAdicionarMaisNumero) {
       // Mensagem inicial explicando como encerrar o programa
       System.out.print(
@@ -42,7 +41,7 @@ public class ExerciseEight {
             System.out.println("Nenhum número foi inserido na lista.");
           }
         } else {
-          // Caso não seja -1, adiciona o número na lista
+          // Caso não seja -1, adiciona o número na lista por padrão até que -1 seja utilizado
           listaDeNumerosInteiros.add(input);
 
           // Mostra a lista atualizada ao usuário

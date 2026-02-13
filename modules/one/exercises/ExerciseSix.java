@@ -20,7 +20,7 @@ public class ExerciseSix {
       // Se encontrarmos um divisor, essa variável será alterada para false
       boolean primo = true;
 
-      // Testa todos os possíveis divisores entre 2 e os números anteriores
+      // Testa todos os possíveis divisores entre 2 e os números anteriores ao número da iteração pai
       for (int divisor = 2; divisor < numero; divisor++) {
         
         // Se o número for divisível por qualquer valor diferente de 1 e dele mesmo,

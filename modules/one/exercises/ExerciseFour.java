@@ -11,9 +11,11 @@ public class ExerciseFour {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     ArrayList<Integer> listOfNumber = new ArrayList<Integer>();
+    // defino infinidade até que uma condição seja efetuada
     boolean running = true;
 
     while (running) {
+      // Faço a exibição do menu
       System.out.println(
           "Escolha uma das opções abaixo!\n\n1 - Adicionar um número a lista\n2 - Remover um número da lista\n0 - Sair do app!");
       int option = Integer.parseInt(scanner.nextLine());
@@ -25,16 +27,19 @@ public class ExerciseFour {
           listOfNumber.add(numberToAdd);
           System.out.print(">>>>> " + listOfNumber.toString() + " <<<<<\n\n");
           break;
+
         case 2:
           System.out.print("Qual número deseja remover? R:");
           int numberToRemove = Integer.parseInt(scanner.nextLine());
           listOfNumber.remove(Integer.valueOf(numberToRemove));
           System.out.println(">>>>> " + listOfNumber.toString() + " <<<<<\n\n");
           break;
+
         case 0:
           System.out.println("Aplicação encerrada!");
           running = false;
           break;
+          
         default:
           System.out.println("Opção inválida, utilize apenas os números do menu!\n\n");
       }

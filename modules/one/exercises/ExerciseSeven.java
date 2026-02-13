@@ -15,7 +15,7 @@ public class ExerciseSeven {
       { ' ', ' ', ' ' }
   };
 
-  // Define qual jogador começa. O jogo sempre inicia com 'X'
+  // Define qual jogador começa. O jogo sempre iniciará com 'X'
   static char jogadorAtual = 'X';
 
   public static void main(String[] args) {
@@ -31,9 +31,11 @@ public class ExerciseSeven {
       // Informa de quem é a vez
       System.out.println("Jogador " + jogadorAtual + ", informe a linha e a coluna (0, 1, 2):");
 
+      // pergunta qual a linha o jogador quer jogar
       System.out.print("Linha: ");
       int linha = scanner.nextInt();
 
+      // pergunta qual a coluna o jogador quer jogar
       System.out.print("Coluna: ");
       int coluna = scanner.nextInt();
 
@@ -78,7 +80,7 @@ public class ExerciseSeven {
       if (i < 2) {
         System.out.println("---+---+---");
       }
-      // exemplo de como fica ao das iterações
+      // exemplo de como fica o tabuleiro após as iterações
       //    |   |    
       // ---+---+---
       //    |   |  
@@ -103,7 +105,8 @@ public class ExerciseSeven {
 
   public static boolean checarVitoria() {
 
-    // Verifica todas as linhas e colunas
+    // Verifica todas as linhas e colunas em busca de uma possível
+    // vitória com campos sequenciais preenchidos
     for (int i = 0; i < 3; i++) {
 
       // Linha completa com o mesmo símbolo

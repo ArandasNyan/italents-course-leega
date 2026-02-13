@@ -14,7 +14,7 @@ public class ExerciseFive {
     for (int i = 0; i < arrayIntegers.length;  i++) {
       // se a posição atual do array é maior que o meu maior numero atual
       if (arrayIntegers[i] >= isBigger) {
-        // então eu adiciono essa posição ao meu novo numero atual
+        // então eu adiciono o número a variavel de maior número atual
         isBigger = arrayIntegers[i];
       }
     }

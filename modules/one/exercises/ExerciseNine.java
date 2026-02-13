@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class ExerciseNine {
 
     public static void main(String[] args) {
-
         // Scanner para entrada de dados do usuário
         Scanner scanner = new Scanner(System.in);
 
@@ -19,8 +18,8 @@ public class ExerciseNine {
 
         int opcao;
 
-        // Loop principal do menu
-        // Continua executando até o usuário escolher sair
+        // Executa enquanto uma condição não é atingida
+        // mostra menu e aguarda informações do usuário
         do {
             System.out.println("\n--- GERENCIADOR DE PESSOAS ---");
             System.out.println("1 - Adicionar Pessoa");
@@ -87,11 +86,11 @@ public class ExerciseNine {
         }
 
         // Percorre a lista e exibe os dados de cada objeto Pessoa
-        for (Pessoa p : lista) {
-            System.out.println("ID: " + p.id +
-                    " | Nome: " + p.nome +
-                    " | Idade: " + p.idade +
-                    " | End: " + p.endereco);
+        for (Pessoa pessoa : lista) {
+            System.out.println("ID: " + pessoa.id +
+                    " | Nome: " + pessoa.nome +
+                    " | Idade: " + pessoa.idade +
+                    " | End: " + pessoa.endereco);
         }
     }
 
@@ -101,7 +100,7 @@ public class ExerciseNine {
         int idProcurado = sc.nextInt();
 
         // Remove da lista a pessoa cujo ID corresponde ao informado
-        boolean removido = lista.removeIf(p -> p.id == idProcurado);
+        boolean removido = lista.removeIf(pessoa -> pessoa.id == idProcurado);
 
         // Informa se a remoção foi realizada ou não
         if (removido) {
@@ -118,23 +117,23 @@ public class ExerciseNine {
         sc.nextLine();
 
         // Procura na lista a pessoa correspondente
-        for (Pessoa p : lista) {
-            if (p.id == idProcurado) {
+        for (Pessoa pessoa : lista) {
+            if (pessoa.id == idProcurado) {
                 // Permite atualizar nome (ou manter o atual)
-                System.out.print("Novo nome (deixe vazio para manter [" + p.nome + "]): ");
+                System.out.print("Novo nome (deixe vazio para manter [" + pessoa.nome + "]): ");
                 String novoNome = sc.nextLine();
-                if (!novoNome.isEmpty()) p.nome = novoNome;
+                if (!novoNome.isEmpty()) pessoa.nome = novoNome;
 
                 // Permite atualizar idade (0 mantém o valor atual)
-                System.out.print("Nova idade (digite 0 para manter [" + p.idade + "]): ");
+                System.out.print("Nova idade (digite 0 para manter [" + pessoa.idade + "]): ");
                 int novaIdade = sc.nextInt();
                 sc.nextLine();
-                if (novaIdade != 0) p.idade = novaIdade;
+                if (novaIdade != 0) pessoa.idade = novaIdade;
 
                 // Permite atualizar endereço (ou manter o atual)
-                System.out.print("Novo endereço (deixe vazio para manter [" + p.endereco + "]): ");
+                System.out.print("Novo endereço (deixe vazio para manter [" + pessoa.endereco + "]): ");
                 String novoEnd = sc.nextLine();
-                if (!novoEnd.isEmpty()) p.endereco = novoEnd;
+                if (!novoEnd.isEmpty()) pessoa.endereco = novoEnd;
 
                 System.out.println("Dados atualizados!");
                 return;

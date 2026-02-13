@@ -17,14 +17,14 @@ public class ExerciseTen {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
-        // Roda o menu até que o usuário indique pra sair (0).
+        // Roda o menu até que o usuário indique pra sair (opção 0).
         do {
             System.out.println("\n===== SISTEMA DE ESTOQUE LOJA =====");
             System.out.println("1 - Adicionar Novo Produto");
             System.out.println("2 - Listar Estoque Completo");
             System.out.println("3 - Atualizar Preço ou Quantidade");
             System.out.println("4 - Remover Produto");
-            System.out.println("0 - Sair");
+            System.out.println("0 - Sair do app");
             System.out.print("Escolha: ");
 
             opcao = scanner.nextInt();
@@ -45,16 +45,19 @@ public class ExerciseTen {
     }
 
     public static void adicionarItem(Scanner sc) {
+        // questiona o nome do produto
         System.out.print("Nome do Produto: ");
         String nome = sc.nextLine();
 
+        // questiona a quantidade inicial do produto
         System.out.print("Quantidade Inicial: ");
         int qtd = sc.nextInt();
 
+        // pergunta pelo preço unitário
         System.out.print("Preço Unitário: ");
         double preco = sc.nextDouble();
 
-        // Inicia uma estancia e acrescenta ela na lista
+        // inicia uma estancia e acrescenta ela na lista
         estoque.add(new Produto(nome, qtd, preco));
 
         System.out.println("Produto cadastrado com sucesso!");
@@ -69,7 +72,7 @@ public class ExerciseTen {
         System.out.println("\n-------------------------------------------");
 
         for (Produto produto : estoque) {
-            // Se tiver menos de 5, já deixa um aviso de reposição na tela.
+            // Se tiver menos de 5, já deixa um aviso de reposição na tela
             String alerta = (produto.quantidade < 5) ? " [REPOR ESTOQUE!]" : "";
 
             System.out.printf("ID: %d | Item: %-15s | Qtd: %d | Preço: R$ %.2f%s%n",
@@ -83,12 +86,12 @@ public class ExerciseTen {
         System.out.print("Informe o ID do produto: ");
         int idAlvo = sc.nextInt();
 
-        // Percorre a lista pra achar o ID que o cara digitou.
+        // Percorre a lista pra achar o ID que o cara digitou
         for (Produto produto : estoque) {
             if (produto.id == idAlvo) {
                 System.out.println("Produto encontrado: " + produto.nome);
 
-                // Se digitar -1, a gente ignora a mudança e mantém o que já estava.
+                // Se digitar -1, a gente ignora a mudança e mantém o que já estava
                 System.out.print("Nova Quantidade (ou -1 para manter): ");
                 int novaQtd = sc.nextInt();
                 if (novaQtd != -1)
@@ -111,7 +114,7 @@ public class ExerciseTen {
         System.out.print("ID para remover: ");
         int idAlvo = sc.nextInt();
 
-        // Uso o for indexado (i) porque fica mais fácil de remover pelo índice.
+        // Uso o for porque fica mais fácil de remover pelo índice (i)
         for (int i = 0; i < estoque.size(); i++) {
             if (estoque.get(i).id == idAlvo) {
                 estoque.remove(i);
@@ -125,7 +128,7 @@ public class ExerciseTen {
 }
 
 class Produto {
-    // Contador estático pra garantir que cada produto tenha um ID único automático.
+    // Contador estático pra garantir que cada produto tenha um ID único automático
     static int contador = 1;
 
     int id;
@@ -137,7 +140,7 @@ class Produto {
         this.id = contador++;
         // contador++;
         this.nome = nome;
-        // Garante que o estoque nunca comece com número negativo.
+        // Garante que o estoque nunca comece com número negativo
         this.quantidade = Math.max(0, quantidade);
         this.preco = preco;
     }

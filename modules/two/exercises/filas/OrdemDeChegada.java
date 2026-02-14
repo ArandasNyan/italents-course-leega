@@ -13,7 +13,7 @@ public class OrdemDeChegada {
       // Criando a fila de elementos (podem ser strings, objetos, etc.)
       Queue<String> fila = new LinkedList<>();
 
-      // 1. Simulando a Ordem de Chegada (Inserção)
+      // Simulando a Ordem de Chegada (Inserção)
       System.out.println("--- ENTRADA NA FILA ---");
       String[] chegadas = {"Elemento A", "Elemento B", "Elemento C", "Elemento D"};
 
@@ -25,7 +25,7 @@ public class OrdemDeChegada {
 
       System.out.println("\nStatus atual da fila: " + fila);
 
-      // 2. Simulando a Ordem de Saída (Remoção)
+      // Simulando a Ordem de Saída (Remoção)
       System.out.println("\n--- ORDEM DE SAÍDA ---");
       
       // Enquanto a fila não estiver vazia, removemos o próximo

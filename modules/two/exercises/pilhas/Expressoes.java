@@ -11,7 +11,7 @@ public class Expressoes {
   public static void main(String[] args) {
     // meta de expressões, apenas: ()
     // declaro uma variavel com expressão matemática usando parenteses
-    String expression = "[{(5 + 5} - 5]";
+    String expression = "[{(5 + 5)} - 5]";
 
     // verifico se o balanceamento é valido
     if (check(expression)) {
@@ -26,33 +26,44 @@ public class Expressoes {
   public static boolean check(String expression) {
     Deque<Character> pilha = new ArrayDeque<>();
 
-    for(char caractere : expression.toCharArray()) {
+    // busco caractere dentro da minha expressão
+    for (char caractere : expression.toCharArray()) {
+      // verifico se há algum caractere de abertura
       if (caractere == '(' || caractere == '[' || caractere == '{') {
+        // se houver eu adiciono
         pilha.push(caractere);
       } else if (caractere == '}' || caractere == ']' || caractere == ')') {
-        if(pilha.isEmpty()) {
-          System.out.println("Você esqueceu de abrir o companheiro de >>> " + caractere + " <<<\n");
+        // se não houver abertura então busco pelo fechamento
+        if (pilha.isEmpty()) {
+          // se na pilha não houver abertura então informo que a expressão está errada
+          System.out.println("Erro: Tentou fechar '" + caractere + "' mas não havia nada aberto.");
           return false;
         }
 
+        // se houver eu tiro do topo o caractere
         char topoDaPilha = pilha.pop();
 
-        // o topo da pilha é o companheiro correto do caractere atual
+        // verifico se o meu caracter atual é companheiro do que estava no topo da pilha
         if (!isCompanion(topoDaPilha, caractere)) {
-          System.out.println("Você esqueceu de fechar o companheiro de >>> " + topoDaPilha + " <<<\n");
-          // retorno é false se não for o correto
+          System.out.println(
+              "Erro de correspondência: Abriu '" + topoDaPilha + "' mas tentou fechar com '" + caractere + "'.");
           return false;
         }
       }
     }
 
-    return pilha.isEmpty(); // se houver algo na pilha então a expressão está errada!
+    if (!pilha.isEmpty()) {
+      System.out.println("Erro: Os seguintes símbolos não foram fechados: " + pilha);
+      return false;
+    }
+
+    return true;
   }
 
   // verifica se o topo da pilha é o companheiro correto do caractere encontrado
   private static boolean isCompanion(char topoDaPilha, char caractere) {
-    return topoDaPilha == '(' && caractere == ')' 
-    || topoDaPilha == '[' && caractere == ']' 
-    || topoDaPilha == '{' && caractere == '}';
+    return topoDaPilha == '(' && caractere == ')'
+        || topoDaPilha == '[' && caractere == ']'
+        || topoDaPilha == '{' && caractere == '}';
   }
 }

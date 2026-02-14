@@ -24,10 +24,15 @@ public class InversaoDePilha {
   public static Deque<String> inverterOrdem(Deque<String> pilhaDeNumeros) {
     Deque<String> listaInvertida = new ArrayDeque<>();
 
+    // faço a condição até que a pilha de número correta esteja vazia
     while(!pilhaDeNumeros.isEmpty()) {
+      // removendo através do metodo removeLast da pilha adiciono por meio de
+      // addLast para que o primeiro item da pilha de número seja o ultimo a vir
+      // essa condição será percorrida até que como dito antes, a pilha esteja vazia
       listaInvertida.addLast(pilhaDeNumeros.removeLast());
     }
 
+    // retorno a lista invertida
     return listaInvertida;
   }
 }

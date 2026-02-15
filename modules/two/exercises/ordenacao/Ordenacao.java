@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Ordenacao {
     public static void main(String[] args) {
         // Criando um ArrayList de exemplo
-        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(5, 2, 9, 1, 5, 6));
+        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(5, 2, 9, 1, 3, 6));
 
         System.out.println("Lista Original: " + numeros);
 
@@ -27,17 +27,12 @@ public class Ordenacao {
         for (int i = 0; i < n - 1; i++) {
             swap = false;
 
-            // laço children compara os vizinhos
-            // n - 1 - i evita comparar elementos que já estão na posição correta
-            // pega o tamanho do meu array (n) menos uma posição e informa que
-            // só irá validar a partir do meu indice (i) atual e não antes dele
-            // evita que ele troque posições que já estão certas!
             for (int j = 0; j < (n - 1 - i); j++) {
                 
                 //Se o atual for MENOR que o próximo, troca
                 if (lista.get(j) < lista.get(j + 1)) {
                     // Realizando a troca
-                    int temp = lista.get(j);
+                    int temp = lista.get(j); // 5 < 2 ? arr[0] = 2 e arr[1] = 5
                     lista.set(j, lista.get(j + 1));
                     lista.set(j + 1, temp);
                     
@@ -45,7 +40,7 @@ public class Ordenacao {
                 }
             }
 
-            // Otimização: se não houve nenhuma troca, a lista já está ordenada
+            // se não houve nenhuma troca, a lista já está ordenada
             if (!swap) break;
         }
     }

@@ -1,0 +1,20 @@
+# O que é um método de busca?
+
+Um método de busca é um algoritmo de técnica utilizada para encontrar um determinado 
+elemento ou conjunto de elementos em um conjunto de dados, como uma lista, um array, uma árvore,
+um gráfico ou qualquer estrutura de dados onde a busca por informação seja necessária.
+
+## alguns métodos de busca
+
+- Busca linear
+  - Percorre os elementos sequencialmente até encontrar o elemento desejado.
+  - é simples, mas pode ser ineficiente em conjuntos de dados extensos.
+- Busca binária
+  - Aplicável apenas a conjunto de dados ordenados.
+  - Divide o conjunto de dados pela metada a cada passo, reduzindo o espaço de busca.
+  - Eficiente, com complexidade de tempo logarítmica (O(log n)).
+- Busca por Árvore Binária de Busca (BST)
+  - Utiliza uma estrutura de árvore com propriedades que facilitam a busca, inserção e exclusão de elementos.
+  - Eficiente, com complexidade de tempo logarítmica em operações.
+- Busca por grafos
+  - Inclui métodos como busca em largura (BFS) e busca em profundidade (DFS) para encontrar elementos em estruturas de grafos.

@@ -1,0 +1,15 @@
+# O que é uma árvore binária?
+
+Uma árvore binária é uma estrutura de dados em que cada nó possui no máximo dois nós filhos,
+conhecidos como 'left node' ou 'right node' (nó esquerdo, nó direito). Cada nó contém uma chave e, opcionalmente, dados associados.
+
+## Para que serve uma árvore binária?
+
+- Busca eficiente: As árvores binárias são ótimas para buscar elementos. Como elas mantém uma estrutura ordenada,
+é possível encontrar rapidamente um elemento específico.
+
+- Ordenação e classificação: Muitos algoritmos de ordenação e classificação usam árvores binárias, como a Árvore binária
+de Busca (BST - Binary Search tree).
+
+- Estrutura de dados em bancos de dados: Em bancos de dados, as ávores binárias (como as árvores B e as B+ trees) são
+usadas para indexar e buscar dados rapidamente.

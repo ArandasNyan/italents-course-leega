@@ -23,12 +23,12 @@ public class GrafoPonderado {
   }
 
   public void encontrarCaminho(int inicio, int destino) {
-    // 1. Array de distâncias: começa tudo com "infinito"
+    // Array de distâncias: começa tudo com "infinito"
     int[] distancias = new int[vertices];
     Arrays.fill(distancias, Integer.MAX_VALUE);
     distancias[inicio] = 0;
 
-    // 2. Fila para processar os nós (como na BFS)
+    // Fila para processar os nós (como na BFS)
     Queue<Integer> fila = new LinkedList<>();
     fila.add(inicio);
 
@@ -40,7 +40,7 @@ public class GrafoPonderado {
         int vizinho = aresta[0];
         int pesoAresta = aresta[1];
 
-        // A MÁGICA: Se o caminho (distancia atual + peso da aresta)
+        // Se o caminho (distancia atual + peso da aresta)
         // for menor do que o que já conhecíamos para o vizinho:
         if (distancias[atual] + pesoAresta < distancias[vizinho]) {
           distancias[vizinho] = distancias[atual] + pesoAresta;

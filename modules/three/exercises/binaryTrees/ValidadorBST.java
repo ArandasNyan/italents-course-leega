@@ -12,23 +12,22 @@ public class ValidadorBST {
       return checkLimits(root, Long.MIN_VALUE, Long.MAX_VALUE);
   }
 
-  // A lógica recursiva com "Chão" (min) e "Teto" (max)
+  // A lógica recursiva com minimo e maximo
   private boolean checkLimits(Node node, long min, long max) {
       // Se o nó é nulo, chegamos ao fim de um galho com sucesso
       if (node == null) {
           return true;
       }
 
-      // SE o valor atual fura o chão OU fura o teto, a árvore é inválida
+      // SE o valor atual é maior que o maximo (left node) e menor que o minimo (right node), a árvore é inválida
       if (node.value <= min || node.value >= max) {
-          System.out.println("  > Erro detectado no nó: " + node.value + 
-                             " (Devia estar entre " + min + " e " + max + ")");
+          System.out.println("> Erro detectado no nó: " + node.value);
           return false;
       }
 
       // Recursão: 
-      // Esquerda: teto vira o valor atual
-      // Direita: chão vira o valor atual
+      // Esquerda: maximo vira o valor atual
+      // Direita: minimo vira o valor atual
       return checkLimits(node.left, min, node.value) && 
              checkLimits(node.right, node.value, max);
   }
@@ -51,7 +50,7 @@ public class ValidadorBST {
       //     /  \
       //    10   30
       //        /
-      //       15  <-- Erro! 15 é menor que 20 (raiz), mas está na direita.
+      //       15  <-- Erro! 15 é menor que 20 (raiz), mas está na raiz direita (30) e ao nó esquerdo da raiz.
       arvore.root.right.left = new Node(15);
 
       System.out.println("Teste 2 (Inválida): " + arvore.isValidBST());

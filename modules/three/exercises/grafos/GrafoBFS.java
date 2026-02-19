@@ -7,64 +7,92 @@ import java.util.*;
 // nós em um grafo não ponderado.
 
 public class GrafoBFS {
+    // O mapa guarda: Número do Vértice -> Lista de seus Vizinhos
     private Map<Integer, List<Integer>> adjacencias = new HashMap<>();
 
-    public void adicionarAresta(int u, int v) {
-        adjacencias.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
-        adjacencias.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+    public void adicionarConexao(int verticeA, int verticeB) {
+        // Se o verticeA não existe no mapa, criamos a lista dele
+        if (adjacencias.get(verticeA) == null) {
+            adjacencias.put(verticeA, new ArrayList<>());
+        }
+        // Adicionamos o verticeB como vizinho do verticeA
+        adjacencias.get(verticeA).add(verticeB);
+
+        // Como o caminho funciona para os dois lados, fazemos o inverso
+        if (adjacencias.get(verticeB) == null) {
+            adjacencias.put(verticeB, new ArrayList<>());
+        }
+        adjacencias.get(verticeB).add(verticeA);
     }
 
     public List<Integer> encontrarCaminhoCurto(int inicio, int destino) {
-        // Fila para a BFS e conjunto para não repetir nós
         Queue<Integer> fila = new LinkedList<>();
         Set<Integer> visitados = new HashSet<>();
-
-        // Mapa para guardar de onde viemos: Chave = nó atual, Valor = pai dele
-        Map<Integer, Integer> predecessores = new HashMap<>();
+        
+        // Mapa para lembrar de onde viemos: "Quem é o pai deste vértice?"
+        Map<Integer, Integer> quemMeTrouxeAqui = new HashMap<>();
 
         fila.add(inicio);
         visitados.add(inicio);
 
-        while (!fila.isEmpty()) {
+        while (fila.isEmpty() == false) {
             int atual = fila.poll();
 
-            // Se chegamos no destino, vamos reconstruir o caminho
+            // Se o atual for o que estamos buscando, paramos e montamos o caminho
             if (atual == destino) {
-                return reconstruirCaminho(predecessores, inicio, destino);
+                return montarCaminhoFinal(quemMeTrouxeAqui, inicio, destino);
             }
 
-            for (int vizinho : adjacencias.getOrDefault(atual, new ArrayList<>())) {
-                if (!visitados.contains(vizinho)) {
-                    visitados.add(vizinho);
-                    predecessores.put(vizinho, atual); // Salvamos que chegamos no vizinho pelo 'atual'
-                    fila.add(vizinho);
+            List<Integer> vizinhos = adjacencias.get(atual);
+            
+            if (vizinhos != null) {
+                // Percorrendo a lista de vizinhos do jeito tradicional
+                for (int i = 0; i < vizinhos.size(); i++) {
+                    int vizinho = vizinhos.get(i);
+                    
+                    if (visitados.contains(vizinho) == false) {
+                        visitados.add(vizinho);
+                        // Guardamos: "Para chegar no 'vizinho', eu passei pelo 'atual'"
+                        quemMeTrouxeAqui.put(vizinho, atual);
+                        fila.add(vizinho);
+                    }
                 }
             }
         }
-        return null; // Não há caminho
+        return null; // Não encontrou caminho
     }
 
-    private List<Integer> reconstruirCaminho(Map<Integer, Integer> pais, int inicio, int destino) {
-        List<Integer> caminho = new LinkedList<>();
-        Integer passo = destino;
+    private List<Integer> montarCaminhoFinal(Map<Integer, Integer> historico, int inicio, int destino) {
+        // LinkedList permite usar o addFirst para não precisar inverter a lista depois
+        LinkedList<Integer> caminho = new LinkedList<>();
+        
+        // Começamos de trás para frente (do destino para o início)
+        Integer passoAtual = destino;
 
-        // Voltamos do destino para o início usando o mapa de pais
-        while (passo != null) {
-            caminho.add(0, passo); // Adiciona no início da lista para manter a ordem certa
-            passo = pais.get(passo);
+        while (passoAtual != null) {
+            // addFirst coloca o número sempre na primeira posição da lista
+            caminho.addFirst(passoAtual);
+            
+            if (passoAtual == inicio) {
+                break;
+            }
+            
+            // Pega o vértice que nos levou até o passoAtual
+            passoAtual = historico.get(passoAtual);
         }
+        
         return caminho;
     }
 
     public static void main(String[] args) {
-        GrafoBFS g = new GrafoBFS();
-        g.adicionarAresta(1, 2);
-        g.adicionarAresta(1, 3);
-        g.adicionarAresta(2, 4);
-        g.adicionarAresta(3, 5);
-        g.adicionarAresta(4, 6);
-        g.adicionarAresta(5, 6);
+        GrafoBFS meuGrafo = new GrafoBFS();
+        
+        // Exemplo: Criando conexões entre cidades ou computadores
+        meuGrafo.adicionarConexao(1, 2);
+        meuGrafo.adicionarConexao(1, 3);
+        meuGrafo.adicionarConexao(2, 4);
+        meuGrafo.adicionarConexao(4, 6);
 
-        System.out.println("Caminho curto de 1 a 6: " + g.encontrarCaminhoCurto(1, 6));
+        System.out.println("Caminho encontrado: " + meuGrafo.encontrarCaminhoCurto(1, 6));
     }
 }

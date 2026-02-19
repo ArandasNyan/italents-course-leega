@@ -36,14 +36,14 @@ public class GrafoDFS {
 
     // O método que realmente faz a busca (Recursivo)
     private void percorrer(int atual, boolean[] visitados) {
-        // 1. Marca o nó como visitado
+        // Marca o nó como visitado
         visitados[atual] = true;
         System.out.print(atual + " ");
 
-        // 2. Pega a lista de vizinhos do nó atual
+        // Pega a lista de vizinhos do nó atual
         ArrayList<Integer> vizinhos = adj[atual];
 
-        // 3. Para cada vizinho, se não foi visitado, mergulha nele
+        // Para cada vizinho, se não foi visitado, mergulha nele
         for (Integer vizinho : vizinhos) {
             if (!visitados[vizinho]) {
                 percorrer(vizinho, visitados);

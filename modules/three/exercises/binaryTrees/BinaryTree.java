@@ -25,7 +25,7 @@ public class BinaryTree {
       return root; // retornamos essa raiz
     }
 
-    // se o valor novo é maior que o valor da raiz
+    // se o valor novo é menor que o valor da raiz
     if (value < root.value) {
       // então adiciono um novo valor ao nó esquerdo da raiz
       root.left = recursiveInsert(root.left, value);

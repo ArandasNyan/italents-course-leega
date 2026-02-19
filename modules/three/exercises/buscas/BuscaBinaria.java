@@ -13,17 +13,17 @@ public class BuscaBinaria {
       // Calculamos o meio do intervalo atual
       int meio = inicio + (fim - inicio) / 2;
 
-      // 1. Encontramos o alvo?
+      // Encontramos o alvo?
       if (array[meio] == alvo) {
         return meio;
       }
 
-      // 2. O alvo é maior que o valor do meio?
+      // O alvo é maior que o valor do meio?
       // Então ignoramos a metade esquerda
       if (array[meio] < alvo) {
         inicio = meio + 1;
       }
-      // 3. O alvo é menor que o valor do meio?
+      // O alvo é menor que o valor do meio?
       // Então ignoramos a metade direita
       else {
         fim = meio - 1;
@@ -39,7 +39,7 @@ public class BuscaBinaria {
     // O array DEVE estar ordenado!
     int[] meuArrayOrdenado = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
 
-    int alvo = 50;
+    int alvo = 80;
     int resultado = buscador.buscaBinaria(meuArrayOrdenado, alvo);
 
     System.out.println(resultado != -1 ? "Índice: " + resultado : "Não encontrado");

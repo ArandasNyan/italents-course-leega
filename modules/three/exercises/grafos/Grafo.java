@@ -16,7 +16,11 @@ public class Grafo {
 
     // Adiciona um novo vértice ao grafo
     public void adicionarVertice(int vertice) {
-        adjacencias.putIfAbsent(vertice, new ArrayList<>());
+        // Se o vértice NÃO está no mapa
+        if (!adjacencias.containsKey(vertice)) {
+            // eu adiciono ele com uma lista de vizinhos vazia
+            adjacencias.put(vertice, new ArrayList<>());
+        }
     }
 
     // Adiciona uma aresta (conexão) entre dois vértices
@@ -37,15 +41,15 @@ public class Grafo {
     }
 
     public static void main(String[] args) {
-        Grafo g = new Grafo();
+        Grafo grafo = new Grafo();
         
-        g.adicionarAresta(1, 2);
-        g.adicionarAresta(1, 3);
-        g.adicionarAresta(2, 4);
-        g.adicionarAresta(3, 4);
-        g.adicionarAresta(4, 1);
+        grafo.adicionarAresta(1, 2);
+        grafo.adicionarAresta(1, 3);
+        grafo.adicionarAresta(2, 4);
+        grafo.adicionarAresta(3, 4);
+        grafo.adicionarAresta(4, 1);
 
         System.out.println("Representação do Grafo (Lista de Adjacência):");
-        g.imprimirGrafo();
+        grafo.imprimirGrafo();
     }
 }

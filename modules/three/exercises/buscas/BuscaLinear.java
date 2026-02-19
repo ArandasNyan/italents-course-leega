@@ -23,7 +23,7 @@ public class BuscaLinear {
     BuscaLinear buscador = new BuscaLinear();
     int[] meuArray = { 10, 50, 30, 70, 80, 60, 20, 90, 40 };
 
-    int alvo = 20;
+    int alvo = 100;
     int resultado = buscador.buscaLinear(meuArray, alvo);
 
     if (resultado != -1) {

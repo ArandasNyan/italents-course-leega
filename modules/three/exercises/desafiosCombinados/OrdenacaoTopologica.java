@@ -10,59 +10,74 @@ public class OrdenacaoTopologica {
     private int vertices;
     private ArrayList<Integer>[] adj;
 
+    // Cria a estrutura para guardar o grafo
     public OrdenacaoTopologica(int vertice) {
         this.vertices = vertice;
         this.adj = new ArrayList[vertice];
-        for (int i = 0; i < vertice; i++) adj[i] = new ArrayList<>();
+        // Cria uma lista vazia para cada "tarefa" do grafo
+        for (int i = 0; i < vertice; i++) {
+            adj[i] = new ArrayList<>();
+        }
     }
 
+    // Diz que a 'origem' deve vir antes do 'destino'
     public void adicionarAresta(int origem, int destino) {
-        adj[origem].add(destino); // Direcionado: u -> v (u deve vir antes de v)
+        adj[origem].add(destino); 
     }
 
-    private void dfsTopologica(int destino, boolean[] visitados, Deque<Integer> pilha) {
-        visitados[destino] = true;
+    // (DFS): Entra fundo nas conexões para achar quem depende de quem
+    private void dfsTopologica(int atual, boolean[] visitados, Deque<Integer> pilha) {
+        // Marca que já passou por aqui para não trabalhar duas vezes no mesmo nó
+        visitados[atual] = true;
 
-        // Visita todos os vizinhos (pré-requisitos)
-        for (int vizinho : adj[destino]) {
-            if (!visitados[vizinho]) {
+        // "Para cada tarefa que depende desta que estou agora..."
+        for (int vizinho : adj[atual]) {
+            // Se eu ainda não explorei esse vizinho, vou lá olhar ele agora
+            if (visitados[vizinho] == false) {
                 dfsTopologica(vizinho, visitados, pilha);
             }
         }
 
-        // Depois de visitar tudo que depende dele, coloca na pilha
-        pilha.push(destino);
+        // Se chegou aqui, é porque todas as dependências desse nó já foram olhadas.
+        // Então "guardamos" esse nó na pilha como concluído.
+        pilha.push(atual);
     }
 
+    // O ponto de partida que limpa a mesa e começa o trabalho
     public void ordenar() {
         Deque<Integer> pilha = new ArrayDeque<>();
         boolean[] visitados = new boolean[vertices];
 
-        // Garante que todos os nós sejam visitados (mesmo se o grafo for desconexo)
+        // Passa por todas as tarefas do grafo, do começo ao fim
         for (int i = 0; i < vertices; i++) {
-            if (!visitados[i]) {
+            // Se a tarefa ainda está "esquecida" (não visitada), começa a exploração
+            if (visitados[i] == false) {
                 dfsTopologica(i, visitados, pilha);
             }
         }
 
-        // Exibe os elementos da pilha (que já saem na ordem correta)
-        System.out.println("Ordenação Topológica:");
-        while (!pilha.isEmpty()) {
+        // Mostra o resultado final tirando da pilha
+        System.out.println("Ordenação Topológica");
+        while (pilha.isEmpty() == false) {
+            // Tira quem está no topo e mostra (quem não tinha dependência sai primeiro)
             System.out.print(pilha.pop() + " ");
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
+        // Criamos um grafo com 6 vertices (de 0 a 5)
         OrdenacaoTopologica grafo = new OrdenacaoTopologica(6);
-        // Pense nisso como dependências de tarefas:
-        grafo.adicionarAresta(5, 2);
-        grafo.adicionarAresta(5, 0);
-        grafo.adicionarAresta(4, 0);
-        grafo.adicionarAresta(4, 1);
-        grafo.adicionarAresta(2, 3);
-        grafo.adicionarAresta(3, 1);
+        
+        // Adicionamos as regras de prioridade:
+        grafo.adicionarAresta(5, 2); // 5 antes de 2
+        grafo.adicionarAresta(5, 0); // 5 antes de 0
+        grafo.adicionarAresta(4, 0); // 4 antes de 0
+        grafo.adicionarAresta(4, 1); // 4 antes de 1
+        grafo.adicionarAresta(2, 3); // 2 antes de 3
+        grafo.adicionarAresta(3, 1); // 3 antes de 1
 
+        // Chama o método que organiza e imprime tudo
         grafo.ordenar(); 
-        // Resultado esperado: tarefas que não dependem de ninguém primeiro.
     }
 }

@@ -1,5 +1,3 @@
-/* 1 - Crie uma classe Veiculo com atributos como modelo e ano. Em seguida, crie duas subclasses, Carro e Moto, que herdam de Veiculo, cada um deve possuir pelo menos 2 atributos e um metodo a mais. */
-
 public class Veiculo {
     protected String modelo;
     protected int ano;
